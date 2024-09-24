@@ -8,30 +8,8 @@
 </head>
 <body>
   <div id="app">
-    <div class="product">
-      <div class="product-image">
-        <img v-bind:src="image" :alt="altText">
-      </div>
-      <div class="product-info">
-        <h1>{{ product }} <span v-show="onSale">on Sale!!!</span></h1>
-        <p>{{ description }}</p>
-        <p v-if="inventory > 99">In stock</p>
-        <p v-else-if="inventory < 5 && inventory > 0">Almost sold out</p>
-        <p v-else v-bind:style="{textDecoration: lineThrough}">Out of stock</p>
-        <ul>
-          <li v-for="detail in details">{{detail}}</li>
-        </ul>
-        <div class="color-box">
-          <p v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" v-bind:style="{backgroundColor: variant.variantColor}">{{variant.variantColor}}</p>
-        </div>
-        <ul>
-          <li v-for="size in sizes" v-bind:key="size">{{size}}</li>
-        </ul>
-        <p>Total: {{cart}}</p>
-        <button v-on:click="updateQuantity(1)" :disabled="!inStock" :class="{disabledButton: !inStock}">+</button>
-        <button v-on:click="updateQuantity(-1)">-</button>
-      </div>
-    </div>
+    <product :premium="premium"></product>
+
   </div>
   
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
