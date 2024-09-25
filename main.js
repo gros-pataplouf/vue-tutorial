@@ -99,6 +99,44 @@ Vue.component('product-details', {
           <li v-for="detail in details">{{detail}}</li>
         </ul>
   `
+})
+
+Vue.component('product-review', {
+  template: `
+  <form class="review-form" @submit.prevent="onSubmit">
+  <label for="name">Name</label>
+  <input placeholder="Your name" v-model="name" />
+  <label for="rating">Rating</label>
+  <input placeholder="Your rating" v-model="rating" type="number" min=0 max=5 />
+  <label for="comment"/>
+  <textarea v-model="comment" placeholder="Comment"/>
+  <button type="submit">Submit</button>
+  </form>
+  `,
+  data : () => {
+    return {
+      name: null,
+      rating: null, 
+      comment: null
+    }
+
+  },
+  methods: {
+    onSubmit() {
+      let productReview = {
+        name: this.name,
+        rating: this.rating,
+        comment: this.comment
+      }
+      console.log(productReview)
+      productReview = {
+        name: null,
+        rating: null,
+        comment: null
+      }
+    }
+  }
+
 
 })
 
