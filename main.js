@@ -28,7 +28,7 @@ Vue.component('product', {
         <ul>
           <li v-for="size in sizes" v-bind:key="size">{{size}}</li>
         </ul>
-        <p>Total: {{cart}}</p>
+  
         <p>Shipping: {{shipping}}</p>
         <button v-on:click="updateQuantity(1)" :disabled="!inStock" :class="{disabledButton: !inStock}">+</button>
         <button v-on:click="updateQuantity(-1)">-</button>
@@ -57,20 +57,19 @@ Vue.component('product', {
           quantity: 10,
         },
       ],
-      sizes: ["S", "M", "L"],
-      cart: 0
+      sizes: ["S", "M", "L"]
 
     }
 
   },
   methods: {
     updateQuantity(num) {
-      this.cart += num;
-      this.inventory -= num;
+      console.log(this.variants[this.selected].id)
+      this.$emit('add-to-cart', this.variants[this.selected].id, num)
     },
     updateVariant(index) {
       this.selected = index;
-    },
+    }
   },
   computed: {
     image() {
@@ -93,10 +92,8 @@ Vue.component('product-details', {
     details: {
       type: Array,
       required: true
-
     }
   },
-
   template: `
         <ul>
           <li v-for="detail in details">{{detail}}</li>
@@ -105,13 +102,17 @@ Vue.component('product-details', {
 
 })
 
-
-let app = new Vue({
+new Vue({
   el: "#app",
   data: {
-    premium: true
-  }
-
+    premium: true,
+    cart: []
+  },
+  methods: {
+      updateCart(id, num) {
+        num > 0 ? this.cart.push(id) : this.cart.splice(this.cart.indexOf(id), 1)
+      }
+    }
 });
 
 

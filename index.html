@@ -8,8 +8,10 @@
 </head>
 <body>
   <div id="app">
-    <product :premium="premium"></product>
-
+    <div >
+    <p>Your cart: {{cart.length}}</p>
+    <product @add-to-cart="updateCart" :premium="premium"></product>
+  </div>
   </div>
   
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
